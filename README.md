@@ -176,7 +176,7 @@ src/
 4. **Push database schema**
 
    ```bash
-   bun run db:push
+   bun run push
    ```
 
 5. **Start development server**
@@ -242,7 +242,6 @@ steps
 - [ ] Notifications & reminders
 - [ ] Goal templates
 - [ ] Insights & reflections
-- [ ] Mobile app (React Native)
 - [ ] Data export
 
 ---
