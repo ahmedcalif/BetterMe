@@ -1,26 +1,592 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Nature Theme (Default) - Cream palette */
+  --color-cream-50: #fdfcfb;
+  --color-cream-100: #faf9f6;
+  --color-cream-200: #f5f3ee;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Forest palette */
+  --color-forest-50: #f0f5f1;
+  --color-forest-100: #dce8de;
+  --color-forest-200: #b8d1bc;
+  --color-forest-300: #8fb896;
+  --color-forest-400: #6a9e73;
+  --color-forest-500: #4a7c59;
+  --color-forest-600: #3d6549;
+  --color-forest-700: #324f3c;
+  --color-forest-800: #273d2f;
+  --color-forest-900: #1c2b22;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Sage palette */
+  --color-sage-50: #f4f6f3;
+  --color-sage-100: #e8ede5;
+  --color-sage-200: #d1dbcc;
+  --color-sage-300: #b4c4ac;
+  --color-sage-400: #97ad8c;
+  --color-sage-500: #87a878;
+  --color-sage-600: #6b8a5e;
+  --color-sage-700: #556d4a;
+  --color-sage-800: #41533a;
+  --color-sage-900: #2e3b29;
+
+  /* Bark palette */
+  --color-bark-50: #f7f5f4;
+  --color-bark-100: #ebe7e4;
+  --color-bark-200: #d7cfc9;
+  --color-bark-300: #bdb1a8;
+  --color-bark-400: #a39387;
+  --color-bark-500: #7d7769;
+  --color-bark-600: #635e53;
+  --color-bark-700: #4d4940;
+  --color-bark-800: #3d3229;
+  --color-bark-900: #2a231c;
+
+  /* Earth palette */
+  --color-earth-50: #faf6f3;
+  --color-earth-100: #f3ebe4;
+  --color-earth-200: #e7d7c9;
+  --color-earth-300: #d6bda6;
+  --color-earth-400: #c6a383;
+  --color-earth-500: #c67d5e;
+  --color-earth-600: #a86344;
+  --color-earth-700: #864d35;
+  --color-earth-800: #653a29;
+  --color-earth-900: #44271c;
+
+  /* Custom shadows */
+  --shadow-soft: 0 1px 3px 0 rgba(61, 50, 41, 0.1), 0 1px 2px -1px rgba(61, 50, 41, 0.1);
+  --shadow-soft-lg: 0 10px 15px -3px rgba(61, 50, 41, 0.1), 0 4px 6px -4px rgba(61, 50, 41, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(61, 50, 41, 0.1), 0 8px 10px -6px rgba(61, 50, 41, 0.1);
+  --shadow-2xl: 0 25px 50px -12px rgba(61, 50, 41, 0.25);
+
+  /* Custom animations */
+  --animate-fade-in: fade-in 0.3s ease-out forwards;
+  --animate-slide-up: slide-up 0.3s ease-out forwards;
+  --animate-grow: grow 0.5s ease-out forwards;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes grow {
+    from {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 }
 
+/* Base styles - using plain CSS instead of @apply */
+* {
+  border-color: var(--color-bark-200);
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-cream-100);
+  background-image:
+    radial-gradient(circle at 20% 30%, var(--color-sage-50) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--color-forest-50) 0%, transparent 50%);
+  background-attachment: fixed;
+  color: var(--color-bark-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Card styles */
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-bark-100);
+}
+
+.card-hover {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-bark-100);
+  transition: box-shadow 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-soft-lg);
+  transform: translateY(-2px);
+  border-color: var(--color-bark-200);
+}
+
+/* Button styles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+  ring: 2px;
+  ring-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background: linear-gradient(135deg, var(--color-forest-500), var(--color-forest-600));
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 8px -2px rgba(74, 124, 89, 0.4);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-forest-600), var(--color-forest-700));
+  box-shadow: 0 4px 12px -2px rgba(74, 124, 89, 0.5);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-cream-100),
+    0 0 0 5px var(--color-forest-400);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background-color: var(--color-sage-100);
+  color: var(--color-forest-700);
+  cursor: pointer;
+  border: 1px solid var(--color-sage-200);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-sage-200);
+  border-color: var(--color-sage-300);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px -2px rgba(107, 138, 94, 0.3);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-cream-100), 0 0 0 5px var(--color-sage-400);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background-color: transparent;
+  color: var(--color-bark-600);
+  cursor: pointer;
+}
+
+.btn-ghost:hover {
+  background-color: var(--color-cream-200);
+  color: var(--color-bark-800);
+}
+
+.btn-ghost:active {
+  background-color: var(--color-bark-100);
+}
+
+.btn-ghost:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-cream-100), 0 0 0 5px var(--color-bark-300);
+}
+
+.btn-ghost:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.75rem;
+  padding: 0.625rem 1.25rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  background-color: #fef2f2;
+  color: #dc2626;
+  cursor: pointer;
+  border: 1px solid #fee2e2;
+}
+
+.btn-danger:hover {
+  background-color: #fee2e2;
+  border-color: #fecaca;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px -2px rgba(220, 38, 38, 0.3);
+}
+
+.btn-danger:active {
+  transform: translateY(0);
+}
+
+.btn-danger:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-cream-100), 0 0 0 5px #ef4444;
+}
+
+.btn-danger:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input styles */
+.input {
+  width: 100%;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-bark-200);
+  background-color: white;
+  padding: 0.625rem 1rem;
+  color: var(--color-bark-800);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--color-bark-400);
+}
+
+.input:focus {
+  border-color: var(--color-forest-400);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--color-forest-100);
+}
+
+/* Progress bar styles */
+.progress-bar {
+  height: 0.5rem;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 9999px;
+  background-color: var(--color-sage-100);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--color-sage-400),
+    var(--color-forest-500)
+  );
+  transition: all 0.5s ease-out;
+}
+
+/* Animation delay utilities */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+/* Accessibility utilities */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================
+   THEME OVERRIDES
+   ============================================ */
+
+/* Light Theme */
+[data-theme="light"] {
+  --color-cream-50: #ffffff;
+  --color-cream-100: #f9fafb;
+  --color-cream-200: #f3f4f6;
+
+  --color-forest-50: #ecfdf5;
+  --color-forest-100: #d1fae5;
+  --color-forest-200: #a7f3d0;
+  --color-forest-300: #6ee7b7;
+  --color-forest-400: #34d399;
+  --color-forest-500: #10b981;
+  --color-forest-600: #059669;
+  --color-forest-700: #047857;
+  --color-forest-800: #065f46;
+  --color-forest-900: #064e3b;
+
+  --color-sage-50: #f0fdf4;
+  --color-sage-100: #dcfce7;
+  --color-sage-200: #bbf7d0;
+  --color-sage-300: #86efac;
+  --color-sage-400: #4ade80;
+  --color-sage-500: #22c55e;
+  --color-sage-600: #16a34a;
+  --color-sage-700: #15803d;
+  --color-sage-800: #166534;
+  --color-sage-900: #14532d;
+
+  --color-bark-50: #f9fafb;
+  --color-bark-100: #f3f4f6;
+  --color-bark-200: #e5e7eb;
+  --color-bark-300: #d1d5db;
+  --color-bark-400: #9ca3af;
+  --color-bark-500: #6b7280;
+  --color-bark-600: #4b5563;
+  --color-bark-700: #374151;
+  --color-bark-800: #1f2937;
+  --color-bark-900: #111827;
+}
+
+[data-theme="light"] body {
+  background-color: #f9fafb;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(220, 252, 231, 0.4) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(187, 247, 208, 0.4) 0%, transparent 50%);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-cream-50: #1a1a1a;
+  --color-cream-100: #0f0f0f;
+  --color-cream-200: #0a0a0a;
+
+  --color-forest-50: #1a2e23;
+  --color-forest-100: #234231;
+  --color-forest-200: #2d5640;
+  --color-forest-300: #3a6f52;
+  --color-forest-400: #4a8a66;
+  --color-forest-500: #5ca67b;
+  --color-forest-600: #70c291;
+  --color-forest-700: #87d4a4;
+  --color-forest-800: #a3e0ba;
+  --color-forest-900: #c3ecd2;
+
+  --color-sage-50: #1a261f;
+  --color-sage-100: #243429;
+  --color-sage-200: #2e4233;
+  --color-sage-300: #3a5541;
+  --color-sage-400: #4a6b53;
+  --color-sage-500: #5c8367;
+  --color-sage-600: #729d7d;
+  --color-sage-700: #8bb795;
+  --color-sage-800: #a7d1af;
+  --color-sage-900: #c5e5cb;
+
+  --color-bark-50: #262626;
+  --color-bark-100: #1f1f1f;
+  --color-bark-200: #171717;
+  --color-bark-300: #404040;
+  --color-bark-400: #737373;
+  --color-bark-500: #a3a3a3;
+  --color-bark-600: #d4d4d4;
+  --color-bark-700: #e5e5e5;
+  --color-bark-800: #f5f5f5;
+  --color-bark-900: #fafafa;
+}
+
+[data-theme="dark"] body {
+  background-color: #0a0a0a;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(42, 78, 58, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(58, 95, 72, 0.15) 0%, transparent 50%);
+}
+
+[data-theme="dark"] .card,
+[data-theme="dark"] .card-hover {
+  background-color: #1a1a1a;
+  border-color: #262626;
+}
+
+[data-theme="dark"] .input {
+  background-color: #1a1a1a;
+  border-color: #404040;
+  color: #f5f5f5;
+}
+
+[data-theme="dark"] .input::placeholder {
+  color: #737373;
+}
+
+[data-theme="dark"] .input:focus {
+  border-color: var(--color-forest-500);
+  box-shadow: 0 0 0 3px rgba(92, 166, 123, 0.2);
+}
+
+/* Text color overrides for dark theme */
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: var(--color-bark-800);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span,
+[data-theme="dark"] div {
+  color: var(--color-bark-700);
+}
+
+/* Override specific Tailwind classes in dark mode */
+[data-theme="dark"] .text-bark {
+  color: var(--color-bark-800) !important;
+}
+
+[data-theme="dark"] .text-bark-800 {
+  color: var(--color-bark-800) !important;
+}
+
+[data-theme="dark"] .text-bark-700 {
+  color: var(--color-bark-700) !important;
+}
+
+[data-theme="dark"] .text-bark-600 {
+  color: var(--color-bark-600) !important;
+}
+
+[data-theme="dark"] .text-bark-500 {
+  color: var(--color-bark-500) !important;
+}
+
+[data-theme="dark"] .text-bark-400 {
+  color: var(--color-bark-400) !important;
+}
+
+[data-theme="dark"] .text-stone {
+  color: var(--color-bark-600) !important;
+}
+
+/* Button text in dark mode */
+[data-theme="dark"] .btn-primary {
+  background: linear-gradient(135deg, var(--color-forest-600), var(--color-forest-700));
+  color: var(--color-bark-900);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background: linear-gradient(135deg, var(--color-forest-700), var(--color-forest-800));
+}
+
+[data-theme="dark"] .btn-secondary {
+  background-color: var(--color-sage-200);
+  color: var(--color-bark-900);
+  border-color: var(--color-sage-300);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+  background-color: var(--color-sage-300);
+  border-color: var(--color-sage-400);
+}
+
+[data-theme="dark"] .btn-ghost {
+  color: var(--color-bark-600);
+}
+
+[data-theme="dark"] .btn-ghost:hover {
+  background-color: var(--color-bark-50);
+  color: var(--color-bark-800);
+}
+
+/* Progress bar in dark mode */
+[data-theme="dark"] .progress-bar {
+  background-color: var(--color-sage-200);
+}
+
+/* Links in dark mode */
+[data-theme="dark"] a {
+  color: var(--color-forest-600);
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--color-forest-700);
 }
