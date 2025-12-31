@@ -19,9 +19,6 @@ import { and, desc, eq } from "drizzle-orm";
 import { mightFail } from "might-fail";
 import { revalidatePath } from "next/cache";
 
-/**
- * Helper to convert database records to typed objects with steps
- */
 async function enrichGoalsWithSteps(
   goalRecords: (typeof goals.$inferSelect)[]
 ): Promise<GoalWithSteps[]> {
@@ -65,9 +62,6 @@ async function enrichGoalsWithSteps(
   );
 }
 
-/**
- * Get all goals for the current season
- */
 export async function getCurrentSeasonGoals(): Promise<
   ActionResponse<{
     goals: GoalWithSteps[];
@@ -106,9 +100,6 @@ export async function getCurrentSeasonGoals(): Promise<
   }
 }
 
-/**
- * Get goals for a specific season
- */
 export async function getGoalsBySeason(
   seasonKey: string
 ): Promise<ActionResponse<GoalWithSteps[]>> {
@@ -139,9 +130,6 @@ export async function getGoalsBySeason(
   }
 }
 
-/**
- * Get a single goal by ID
- */
 export async function getGoalById(
   goalId: string
 ): Promise<ActionResponse<GoalWithSteps>> {
@@ -172,9 +160,6 @@ export async function getGoalById(
   }
 }
 
-/**
- * Create a new goal
- */
 export async function createGoal(
   input: CreateGoalInput
 ): Promise<ActionResponse<GoalWithSteps>> {
@@ -182,7 +167,6 @@ export async function createGoal(
     const user = await requireAuth();
     const db = getDB();
 
-    // Validate input
     if (!input.title || input.title.trim().length < 3) {
       return { success: false, error: "Title must be at least 3 characters" };
     }
@@ -243,9 +227,6 @@ export async function createGoal(
   }
 }
 
-/**
- * Update an existing goal
- */
 export async function updateGoal(
   goalId: string,
   input: UpdateGoalInput
@@ -254,7 +235,6 @@ export async function updateGoal(
     const user = await requireAuth();
     const db = getDB();
 
-    // Verify ownership
     const { result: existing } = await mightFail(
       db
         .select()
@@ -267,7 +247,6 @@ export async function updateGoal(
       return { success: false, error: "Goal not found" };
     }
 
-    // Build update object
     const updates: Partial<typeof goals.$inferInsert> & { updatedAt: Date } = {
       updatedAt: new Date(),
     };
@@ -313,9 +292,6 @@ export async function updateGoal(
   }
 }
 
-/**
- * Delete a goal
- */
 export async function deleteGoal(
   goalId: string
 ): Promise<ActionResponse<{ message: string }>> {
@@ -323,7 +299,6 @@ export async function deleteGoal(
     const user = await requireAuth();
     const db = getDB();
 
-    // Verify ownership
     const { result: existing } = await mightFail(
       db
         .select()

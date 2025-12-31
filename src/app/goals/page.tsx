@@ -25,7 +25,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6 animate-fade-in">
-      {/* Back link */}
       <Link
         href="/dashboard"
         className="inline-flex items-center gap-2 text-bark-500 hover:text-bark-700 transition-colors"
@@ -34,7 +33,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
         Back to goals
       </Link>
 
-      {/* Goal details card */}
       <div className="card">
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1">
@@ -60,7 +58,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
           <GoalActions goalId={goal.id} isCompleted={isCompleted} />
         </div>
 
-        {/* Progress section */}
         <div className="space-y-2">
           <div className="flex items-center justify-between text-sm">
             <span className="text-bark-500">
@@ -73,7 +70,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
           <ProgressBar value={goal.progress} />
         </div>
 
-        {/* Dates */}
         <div className="mt-4 pt-4 border-t border-bark-100 text-sm text-bark-400">
           Created {formatDate(goal.createdAt)}
           {goal.completedAt && (
@@ -82,7 +78,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
         </div>
       </div>
 
-      {/* Steps card */}
       <div className="card">
         <h2 className="text-lg font-semibold text-bark-800 mb-4">
           Steps ({completedSteps}/{goal.steps.length})
@@ -100,7 +95,6 @@ export default async function GoalPage({ params }: GoalPageProps) {
           )}
         </div>
 
-        {/* Add step form */}
         {!isCompleted && <AddStepForm goalId={goal.id} />}
       </div>
     </div>

@@ -6,9 +6,6 @@ import { requireAuth } from "@/lib/auth";
 import { and, eq, or } from "drizzle-orm";
 import { mightFail } from "might-fail";
 
-/**
- * Get all completed and archived goals for the current user
- */
 export async function getArchivedGoals() {
   const user = await requireAuth();
   const db = getDB();

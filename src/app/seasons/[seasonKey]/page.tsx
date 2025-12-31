@@ -14,15 +14,12 @@ interface SeasonPageProps {
 }
 
 export default async function SeasonPage({ params }: SeasonPageProps) {
-  // Require authentication
   await requireAuth();
 
   const { seasonKey } = await params;
 
-  // Parse season key
   const season = parseSeasonKey(seasonKey);
 
-  // Redirect if invalid season key
   if (!season) {
     redirect("/seasons");
   }

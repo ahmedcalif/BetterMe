@@ -28,10 +28,8 @@ const seasonBackgrounds: Record<SeasonName, string> = {
 };
 
 export default async function SeasonsPage() {
-  // Require authentication
   await requireAuth();
 
-  // Get user seasons
   const response = await getUserSeasons();
 
   if (!response.success) {
@@ -40,10 +38,8 @@ export default async function SeasonsPage() {
 
   const seasonKeys = response.data || [];
 
-  // Parse seasons and filter out invalid ones
   const seasons = seasonKeys
     .map((key) => {
-      // Skip undefined or invalid keys
       if (!key) return null;
 
       const parsed = parseSeasonKey(key);
@@ -58,7 +54,6 @@ export default async function SeasonsPage() {
     })
     .filter((season): season is NonNullable<typeof season> => season !== null)
     .sort((a, b) => {
-      // Sort by year descending, then by season order (winter, spring, summer, fall)
       if (a.year !== b.year) return b.year - a.year;
       const seasonOrder: Record<SeasonName, number> = {
         winter: 0,

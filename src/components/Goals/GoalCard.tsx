@@ -27,7 +27,6 @@ export function GoalCard({ goal, className, style }: GoalCardProps) {
       aria-label={`${goal.title} - ${completedSteps} of ${totalSteps} steps completed, ${goal.progress}% progress`}
       role="listitem"
     >
-      {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex-1 min-w-0">
           {isCompleted && (
@@ -52,14 +51,12 @@ export function GoalCard({ goal, className, style }: GoalCardProps) {
         </div>
       </div>
 
-      {/* Description */}
       {goal.description && (
         <p className="text-sm text-stone line-clamp-2 mb-4 leading-relaxed">
           {goal.description}
         </p>
       )}
 
-      {/* Stats */}
       <div className="flex items-center gap-4 mb-4">
         <div className="flex items-center gap-2">
           <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center" aria-hidden="true">
@@ -86,7 +83,6 @@ export function GoalCard({ goal, className, style }: GoalCardProps) {
         </div>
       </div>
 
-      {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs">
           <span className="font-medium text-forest">

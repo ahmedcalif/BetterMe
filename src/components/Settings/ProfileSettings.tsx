@@ -62,7 +62,6 @@ export default function ProfileSettings({
 
   return (
     <div className="space-y-4">
-      {/* Avatar and Email (read-only) */}
       <div className="flex items-center gap-4 pb-4 border-b border-sage/20">
         {picture ? (
           <Image
@@ -83,7 +82,6 @@ export default function ProfileSettings({
         </div>
       </div>
 
-      {/* Name Form */}
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -127,7 +125,6 @@ export default function ProfileSettings({
           </div>
         </div>
 
-        {/* Message */}
         {message && (
           <div
             className={`p-3 rounded-lg text-sm ${
@@ -140,7 +137,6 @@ export default function ProfileSettings({
           </div>
         )}
 
-        {/* Buttons */}
         <div className="flex gap-3">
           {!isEditing ? (
             <button

@@ -23,7 +23,6 @@ export default function AccountSettings() {
     const result = await deleteAccount();
 
     if (result.success) {
-      // Redirect to logout after successful deletion
       window.location.href = "/api/auth/logout";
     } else {
       setError(result.error || "Failed to delete account");
@@ -37,7 +36,6 @@ export default function AccountSettings() {
         Irreversible actions that affect your account and data.
       </p>
 
-      {/* Logout Button */}
       <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
         <div>
           <h3 className="font-medium text-bark mb-1">Sign Out</h3>
@@ -50,7 +48,6 @@ export default function AccountSettings() {
         </LogoutLink>
       </div>
 
-      {/* Delete Account */}
       <div className="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-200">
         <div>
           <h3 className="font-medium text-red-700 mb-1">Delete Account</h3>
@@ -67,7 +64,6 @@ export default function AccountSettings() {
         </button>
       </div>
 
-      {/* Delete Confirmation Modal */}
       <Modal
         isOpen={showDeleteModal}
         onClose={() => {

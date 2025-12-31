@@ -8,9 +8,6 @@ import type { GoalWithSteps, Step } from "@/types";
 import { and, eq } from "drizzle-orm";
 import { mightFail } from "might-fail";
 
-/**
- * Helper to convert database records to typed objects with steps
- */
 async function enrichGoalsWithSteps(
   goalRecords: (typeof goals.$inferSelect)[]
 ): Promise<GoalWithSteps[]> {
@@ -54,9 +51,6 @@ async function enrichGoalsWithSteps(
   );
 }
 
-/**
- * Get all goals for a specific season
- */
 export async function getSeasonGoals(seasonKey: string) {
   const user = await requireAuth();
   const db = getDB();
@@ -90,9 +84,6 @@ export async function getSeasonGoals(seasonKey: string) {
   };
 }
 
-/**
- * Get all unique seasons from user's goals
- */
 export async function getUserSeasons() {
   const user = await requireAuth();
   const db = getDB();
@@ -115,9 +106,8 @@ export async function getUserSeasons() {
   const seasons = result || [];
   const currentSeason = getCurrentSeason();
 
-  // Always include current season even if no goals yet
   if (!seasons.find((s) => s.season === currentSeason.key)) {
-    seasons.push({ season: currentSeason.key });
+    seasons.push({ season: currentSeason.key! });
   }
 
   return {

@@ -67,7 +67,6 @@ export default async function StepsPage() {
         />
       ) : (
         <div className="space-y-6">
-          {/* Stats */}
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-white rounded-lg shadow-sm border border-sage/20 p-4">
               <div className="text-2xl font-bold text-bark">
@@ -89,7 +88,6 @@ export default async function StepsPage() {
             </div>
           </div>
 
-          {/* Pending Steps */}
           {pendingSteps.length > 0 && (
             <div>
               <h2 className="text-xl font-semibold text-bark mb-4 flex items-center gap-2">
@@ -112,7 +110,6 @@ export default async function StepsPage() {
             </div>
           )}
 
-          {/* Completed Steps */}
           {completedSteps.length > 0 && (
             <div>
               <h2 className="text-xl font-semibold text-bark mb-4 flex items-center gap-2">

@@ -61,7 +61,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
 
   return (
     <div className="space-y-8">
-      {/* Goal Header */}
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-forest-600 via-forest-500 to-sage-600 p-8 md:p-12 text-white shadow-2xl">
         <div className="relative z-10">
           <div className="flex items-start justify-between gap-4 mb-6">
@@ -98,7 +97,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
           )}
         </div>
 
-        {/* Decorative elements */}
         <div
           className="absolute -top-24 -right-24 w-96 h-96 bg-sage-400/20 rounded-full blur-3xl"
           aria-hidden="true"
@@ -113,7 +111,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
         />
       </section>
 
-      {/* Statistics Cards */}
       <section aria-label="Goal statistics">
         <h2 className="sr-only">Goal Statistics</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -179,7 +176,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
         </div>
       </section>
 
-      {/* Progress Bar */}
       {totalSteps > 0 && (
         <section className="bg-white rounded-2xl p-6 shadow-lg border border-bark-100">
           <div className="flex items-center justify-between mb-3">
@@ -204,7 +200,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
         </section>
       )}
 
-      {/* Steps Section */}
       <section aria-label="Goal steps">
         <div className="flex items-center justify-between mb-6">
           <div>
@@ -228,7 +223,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
           )}
         </div>
 
-        {/* Add Step Form */}
         {isAddingStep && (
           <AddStepForm
             goalId={goal.id}
@@ -237,7 +231,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
           />
         )}
 
-        {/* Steps List */}
         {totalSteps > 0 ? (
           <div className="space-y-3">
             {goal.steps.map((step, index) => (
@@ -273,7 +266,6 @@ export function GoalDetailContent({ goal }: GoalDetailContentProps) {
         )}
       </section>
 
-      {/* Actions */}
       <section className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-bark-200">
         <button
           onClick={handleToggleComplete}

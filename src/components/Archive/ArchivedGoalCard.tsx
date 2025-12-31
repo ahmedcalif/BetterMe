@@ -11,7 +11,6 @@ export default function ArchivedGoalCard({ goal }: ArchivedGoalCardProps) {
   return (
     <Link href={`/goals?id=${goal.id}`}>
       <div className="bg-white rounded-lg shadow-sm border border-sage/20 p-5 hover:shadow-md transition-shadow h-full">
-        {/* Status Badge */}
         <div className="mb-3">
           <span
             className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
@@ -58,19 +57,16 @@ export default function ArchivedGoalCard({ goal }: ArchivedGoalCardProps) {
           </span>
         </div>
 
-        {/* Goal Title */}
         <h3 className="text-lg font-semibold text-bark mb-2 line-clamp-2">
           {goal.title}
         </h3>
 
-        {/* Goal Description */}
         {goal.description && (
           <p className="text-sm text-stone line-clamp-3 mb-4">
             {goal.description}
           </p>
         )}
 
-        {/* Completion Date */}
         {goal.completedAt && (
           <div className="text-xs text-stone flex items-center gap-1 mt-auto">
             <svg

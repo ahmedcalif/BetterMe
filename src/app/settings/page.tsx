@@ -6,10 +6,8 @@ import ThemeSettings from "@/components/Settings/ThemeSettings";
 import AccountSettings from "@/components/Settings/AccountSettings";
 
 export default async function SettingsPage() {
-  // Require authentication
   const user = await requireAuth();
 
-  // Get user settings
   const response = await getUserSettings();
 
   if (!response.success || !response.data) {
@@ -26,7 +24,6 @@ export default async function SettingsPage() {
       </div>
 
       <div className="space-y-6">
-        {/* Profile Settings */}
         <div className="bg-white rounded-lg shadow-sm border border-sage/20 p-6">
           <h2 className="text-xl font-semibold text-bark mb-4 flex items-center gap-2">
             <svg
@@ -52,7 +49,6 @@ export default async function SettingsPage() {
           />
         </div>
 
-        {/* Theme Settings */}
         <div className="bg-white rounded-lg shadow-sm border border-sage/20 p-6">
           <h2 className="text-xl font-semibold text-bark mb-4 flex items-center gap-2">
             <svg
@@ -73,7 +69,6 @@ export default async function SettingsPage() {
           <ThemeSettings currentTheme={settings.theme} />
         </div>
 
-        {/* Account Settings */}
         <div className="bg-white rounded-lg shadow-sm border border-red-200 p-6">
           <h2 className="text-xl font-semibold text-red-700 mb-4 flex items-center gap-2">
             <svg

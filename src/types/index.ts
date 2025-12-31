@@ -1,13 +1,12 @@
-// Season types
 export type SeasonName = "winter" | "spring" | "summer" | "fall";
 
 export interface Season {
   name: SeasonName;
   year: number;
   label: string;
+  key?: string;
 }
 
-// Goal types
 export type GoalStatus = "active" | "completed" | "archived";
 
 export interface Goal {
@@ -39,7 +38,6 @@ export interface GoalWithSteps extends Goal {
   progress: number;
 }
 
-// Input types for server actions
 export interface CreateGoalInput {
   title: string;
   description?: string | null;
@@ -64,14 +62,12 @@ export interface UpdateStepInput {
   order?: number;
 }
 
-// API Response types
 export interface ActionResponse<T> {
   success: boolean;
   data?: T;
   error?: string;
 }
 
-// Auth user type
 export interface AuthUser {
   id: string;
   kindeId: string;

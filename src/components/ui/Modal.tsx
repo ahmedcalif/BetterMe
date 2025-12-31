@@ -19,7 +19,6 @@ export function Modal({
   children,
   className,
 }: ModalProps) {
-  // Handle escape key
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -40,13 +39,11 @@ export function Modal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      {/* Backdrop */}
       <div
         className="absolute inset-0 bg-bark-900/20 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* Modal content */}
       <div
         className={cn(
           "relative bg-white rounded-3xl shadow-soft-lg w-full max-w-md p-6 animate-grow",

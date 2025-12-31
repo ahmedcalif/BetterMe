@@ -13,9 +13,6 @@ import { and, eq } from "drizzle-orm";
 import { mightFail } from "might-fail";
 import { revalidatePath } from "next/cache";
 
-/**
- * Helper to verify goal ownership
- */
 async function verifyGoalOwnership(
   goalId: string,
   userId: string
@@ -44,9 +41,6 @@ function toStep(record: typeof steps.$inferSelect): Step {
   };
 }
 
-/**
- * Get all steps for a goal
- */
 export async function getStepsByGoalId(
   goalId: string
 ): Promise<ActionResponse<Step[]>> {
@@ -54,7 +48,6 @@ export async function getStepsByGoalId(
     const user = await requireAuth();
     const db = getDB();
 
-    // Verify ownership
     const hasAccess = await verifyGoalOwnership(goalId, user.dbId);
     if (!hasAccess) {
       return { success: false, error: "Goal not found" };
@@ -84,9 +77,6 @@ export async function getStepsByGoalId(
   }
 }
 
-/**
- * Create a new step
- */
 export async function createStep(
   input: CreateStepInput
 ): Promise<ActionResponse<Step>> {
@@ -94,7 +84,6 @@ export async function createStep(
     const user = await requireAuth();
     const db = getDB();
 
-    // Validate input
     if (!input.title || input.title.trim().length < 2) {
       return { success: false, error: "Title must be at least 2 characters" };
     }
@@ -106,13 +95,11 @@ export async function createStep(
       };
     }
 
-    // Verify ownership
     const hasAccess = await verifyGoalOwnership(input.goalId, user.dbId);
     if (!hasAccess) {
       return { success: false, error: "Goal not found" };
     }
 
-    // Calculate order if not provided
     let order = input.order;
     if (order === undefined) {
       const { result: existingSteps } = await mightFail(
@@ -157,9 +144,6 @@ export async function createStep(
   }
 }
 
-/**
- * Update an existing step
- */
 export async function updateStep(
   stepId: string,
   input: UpdateStepInput
@@ -168,7 +152,6 @@ export async function updateStep(
     const user = await requireAuth();
     const db = getDB();
 
-    // Get the step
     const { result: existingStep } = await mightFail(
       db.select().from(steps).where(eq(steps.id, stepId)).limit(1)
     );
@@ -177,7 +160,6 @@ export async function updateStep(
       return { success: false, error: "Step not found" };
     }
 
-    // Verify ownership of the parent goal
     const hasAccess = await verifyGoalOwnership(
       existingStep[0].goalId,
       user.dbId
@@ -186,7 +168,6 @@ export async function updateStep(
       return { success: false, error: "Step not found" };
     }
 
-    // Build update object
     const updates: Partial<typeof steps.$inferInsert> & { updatedAt: Date } = {
       updatedAt: new Date(),
     };
@@ -228,9 +209,6 @@ export async function updateStep(
   }
 }
 
-/**
- * Toggle step completion status
- */
 export async function toggleStep(
   stepId: string
 ): Promise<ActionResponse<Step>> {
@@ -238,7 +216,6 @@ export async function toggleStep(
     const user = await requireAuth();
     const db = getDB();
 
-    // Get the step
     const { result: existingStep } = await mightFail(
       db.select().from(steps).where(eq(steps.id, stepId)).limit(1)
     );
@@ -247,7 +224,6 @@ export async function toggleStep(
       return { success: false, error: "Step not found" };
     }
 
-    // Verify ownership of the parent goal
     const hasAccess = await verifyGoalOwnership(
       existingStep[0].goalId,
       user.dbId
@@ -287,9 +263,6 @@ export async function toggleStep(
   }
 }
 
-/**
- * Delete a step
- */
 export async function deleteStep(
   stepId: string
 ): Promise<ActionResponse<{ message: string; goalId: string }>> {
@@ -297,7 +270,6 @@ export async function deleteStep(
     const user = await requireAuth();
     const db = getDB();
 
-    // Get the step
     const { result: existingStep } = await mightFail(
       db.select().from(steps).where(eq(steps.id, stepId)).limit(1)
     );
@@ -308,7 +280,6 @@ export async function deleteStep(
 
     const goalId = existingStep[0].goalId;
 
-    // Verify ownership of the parent goal
     const hasAccess = await verifyGoalOwnership(goalId, user.dbId);
     if (!hasAccess) {
       return { success: false, error: "Step not found" };

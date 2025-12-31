@@ -10,7 +10,6 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ theme }: ThemeProviderProps) {
   useEffect(() => {
-    // Apply theme to document
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme]);
 

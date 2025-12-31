@@ -21,7 +21,6 @@ export default function DashboardContent({
   goals,
   season,
 }: DashboardContentProps) {
-  // Calculate statistics
   const totalGoals = goals.length;
   const completedGoals = goals.filter((g) => g.status === "completed").length;
   const allSteps = goals.flatMap((g) => g.steps);
@@ -30,13 +29,11 @@ export default function DashboardContent({
   const overallProgress =
     totalSteps > 0 ? Math.round((completedSteps / totalSteps) * 100) : 0;
 
-  // Get goals with recent activity
   const activeGoals = goals.filter((g) => g.status === "active");
   const goalsWithProgress = activeGoals.filter((g) => g.progress > 0);
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-12 space-y-8 animate-fade-in">
-      {/* Hero Section */}
       <section
         className="relative overflow-hidden rounded-3xl bg-linear-to-br from-forest-600 via-forest-500 to-sage-600 p-8 md:p-12 lg:p-16 text-white shadow-2xl"
         aria-label="Dashboard overview"
@@ -94,7 +91,6 @@ export default function DashboardContent({
           )}
         </div>
 
-        {/* Decorative elements */}
         <div
           className="absolute -top-24 -right-24 w-96 h-96 bg-sage-400/20 rounded-full blur-3xl"
           aria-hidden="true"
@@ -196,7 +192,6 @@ export default function DashboardContent({
         </section>
       )}
 
-      {/* Quick Actions */}
       {totalGoals > 0 && (
         <nav aria-label="Quick actions">
           <h2 className="sr-only">Quick Actions</h2>
@@ -257,7 +252,6 @@ export default function DashboardContent({
         </nav>
       )}
 
-      {/* Goals Section */}
       <section aria-label="Your goals">
         <div className="flex items-center justify-between mb-8">
           <div>
@@ -301,7 +295,6 @@ export default function DashboardContent({
         )}
       </section>
 
-      {/* Create Goal Button */}
       <CreateGoalButton season={season} />
     </div>
   );

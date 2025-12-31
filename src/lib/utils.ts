@@ -1,8 +1,5 @@
 import type { Season, SeasonName, Step } from "@/types";
 
-/**
- * Get the season name from a month number (0-11)
- */
 export function getSeasonFromMonth(month: number): SeasonName {
   if (month >= 0 && month <= 2) return "winter";
   if (month >= 3 && month <= 5) return "spring";
@@ -10,9 +7,6 @@ export function getSeasonFromMonth(month: number): SeasonName {
   return "fall";
 }
 
-/**
- * Get the current season based on today's date
- */
 export function getCurrentSeason(): Season {
   const now = new Date();
   const name = getSeasonFromMonth(now.getMonth());
@@ -20,23 +14,14 @@ export function getCurrentSeason(): Season {
   return { name, year, label: formatSeasonLabel(name, year) };
 }
 
-/**
- * Format a season key for database storage (e.g., "winter_2025")
- */
 export function formatSeasonKey(name: SeasonName, year: number): string {
   return `${name}_${year}`;
 }
 
-/**
- * Format a season label for display (e.g., "Winter 2025")
- */
 export function formatSeasonLabel(name: SeasonName, year: number): string {
   return `${name.charAt(0).toUpperCase() + name.slice(1)} ${year}`;
 }
 
-/**
- * Parse a season key back into a Season object
- */
 export function parseSeasonKey(key: string): Season | null {
   const match = key.match(/^(winter|spring|summer|fall)_(\d{4})$/);
   if (!match) return null;
@@ -45,9 +30,6 @@ export function parseSeasonKey(key: string): Season | null {
   return { name, year, label: formatSeasonLabel(name, year) };
 }
 
-/**
- * Get the previous season
- */
 export function getPreviousSeason(current: Season): Season {
   const seasons: SeasonName[] = ["winter", "spring", "summer", "fall"];
   const idx = seasons.indexOf(current.name);
@@ -65,9 +47,6 @@ export function getPreviousSeason(current: Season): Season {
   };
 }
 
-/**
- * Get the next season
- */
 export function getNextSeason(current: Season): Season {
   const seasons: SeasonName[] = ["winter", "spring", "summer", "fall"];
   const idx = seasons.indexOf(current.name);
@@ -85,18 +64,12 @@ export function getNextSeason(current: Season): Season {
   };
 }
 
-/**
- * Calculate progress percentage from steps
- */
 export function calculateProgress(steps: Step[]): number {
   if (steps.length === 0) return 0;
   const completed = steps.filter((s) => s.isCompleted).length;
   return Math.round((completed / steps.length) * 100);
 }
 
-/**
- * Get a friendly progress message based on percentage
- */
 export function getProgressMessage(progress: number): string {
   if (progress === 0) return "Ready to begin";
   if (progress < 25) return "Just getting started";
@@ -106,9 +79,6 @@ export function getProgressMessage(progress: number): string {
   return "Complete!";
 }
 
-/**
- * Format a date for display
- */
 export function formatDate(date: Date): string {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",

@@ -56,7 +56,6 @@ export function StepItem({ step }: StepItemProps) {
       )}
     >
       <div className="flex items-start gap-4">
-        {/* Checkbox */}
         <button
           onClick={handleToggle}
           disabled={isToggling}
@@ -73,7 +72,6 @@ export function StepItem({ step }: StepItemProps) {
           )}
         </button>
 
-        {/* Content */}
         <div className="flex-1 min-w-0">
           <div className="flex items-start justify-between gap-4">
             <p

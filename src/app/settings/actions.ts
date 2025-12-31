@@ -18,9 +18,6 @@ export interface UpdateThemeInput {
   theme: Theme;
 }
 
-/**
- * Get current user's profile settings
- */
 export async function getUserSettings() {
   const user = await requireAuth();
   const db = getDB();
@@ -48,9 +45,6 @@ export async function getUserSettings() {
   };
 }
 
-/**
- * Update user profile (name)
- */
 export async function updateProfile(input: UpdateProfileInput) {
   const user = await requireAuth();
   const db = getDB();
@@ -85,9 +79,6 @@ export async function updateProfile(input: UpdateProfileInput) {
   };
 }
 
-/**
- * Update user theme preference
- */
 export async function updateTheme(input: UpdateThemeInput) {
   const user = await requireAuth();
   const db = getDB();
@@ -111,15 +102,10 @@ export async function updateTheme(input: UpdateThemeInput) {
   };
 }
 
-/**
- * Delete user account and all associated data
- * WARNING: This is irreversible
- */
 export async function deleteAccount() {
   const user = await requireAuth();
   const db = getDB();
 
-  // Due to cascade delete, this will also delete all goals and steps
   const { error } = await mightFail(
     db.delete(users).where(eq(users.id, user.dbId))
   );

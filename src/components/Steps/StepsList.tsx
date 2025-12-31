@@ -23,7 +23,6 @@ export default function StepsList({ steps }: StepsListProps) {
           className="block bg-white rounded-lg shadow-sm border border-sage/20 p-4 hover:shadow-md transition-shadow"
         >
           <div className="flex items-start gap-3">
-            {/* Checkbox */}
             <div className="mt-0.5">
               {step.isCompleted ? (
                 <div className="w-5 h-5 rounded border-2 border-green-600 bg-green-600 flex items-center justify-center">
@@ -46,7 +45,6 @@ export default function StepsList({ steps }: StepsListProps) {
               )}
             </div>
 
-            {/* Content */}
             <div className="flex-1 min-w-0">
               <p
                 className={`font-medium mb-1 ${
@@ -73,7 +71,6 @@ export default function StepsList({ steps }: StepsListProps) {
               </div>
             </div>
 
-            {/* Arrow */}
             <div className="flex-shrink-0">
               <svg
                 className="w-5 h-5 text-sage"

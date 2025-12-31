@@ -45,7 +45,6 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
 
     if (result.success) {
       setMessage({ type: "success", text: result.message || "Theme updated" });
-      // Optionally reload to apply theme
       setTimeout(() => {
         window.location.reload();
       }, 500);
@@ -54,7 +53,7 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
         type: "error",
         text: result.error || "Failed to update theme",
       });
-      setSelectedTheme(currentTheme); // Revert on error
+      setSelectedTheme(currentTheme);
     }
 
     setIsSaving(false);
@@ -66,7 +65,6 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
         Choose your preferred color scheme for the app
       </p>
 
-      {/* Theme Options */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {themes.map((theme) => (
           <button
@@ -80,14 +78,11 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
                 : "border-sage/20 hover:border-sage/40"
             } disabled:opacity-50 disabled:cursor-not-allowed`}
           >
-            {/* Color Preview */}
             <div className={`h-12 rounded-md mb-3 ${theme.preview}`} />
 
-            {/* Theme Info */}
             <h3 className="font-semibold text-bark mb-1">{theme.label}</h3>
             <p className="text-sm text-stone">{theme.description}</p>
 
-            {/* Selected Indicator */}
             {selectedTheme === theme.value && (
               <div className="absolute top-3 right-3 w-6 h-6 bg-forest rounded-full flex items-center justify-center">
                 <svg
@@ -109,7 +104,6 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
         ))}
       </div>
 
-      {/* Message */}
       {message && (
         <div
           className={`p-3 rounded-lg text-sm ${
@@ -122,9 +116,9 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
         </div>
       )}
 
-      {/* Note about theme */}
       <p className="text-xs text-stone italic">
-        Theme preferences are saved to your account and applied across all your devices.
+        Theme preferences are saved to your account and applied across all your
+        devices.
       </p>
     </div>
   );

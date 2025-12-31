@@ -46,13 +46,11 @@ export function GoalActions({ goalId, isCompleted }: GoalActionsProps) {
 
       {showMenu && (
         <>
-          {/* Backdrop to close menu */}
           <div
             className="fixed inset-0 z-10"
             onClick={() => setShowMenu(false)}
           />
 
-          {/* Menu dropdown */}
           <div className="absolute right-0 top-full mt-1 w-48 bg-white rounded-xl shadow-soft-lg border border-bark-100 py-1 z-20">
             {!isCompleted && (
               <button

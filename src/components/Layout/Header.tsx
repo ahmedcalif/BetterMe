@@ -15,7 +15,6 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-50 bg-cream-100/80 backdrop-blur-lg border-b border-bark-100">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
         <Link
           href={authenticated ? "/dashboard" : "/"}
           className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-forest focus:ring-offset-2 rounded-lg"
@@ -27,7 +26,6 @@ export async function Header() {
           <span className="font-bold text-xl text-bark-800">BetterME</span>
         </Link>
 
-        {/* Navigation */}
         {authenticated && (
           <nav className="flex items-center gap-1" aria-label="Main navigation">
             <NavLink href="/dashboard">Dashboard</NavLink>
@@ -46,7 +44,6 @@ export async function Header() {
           </nav>
         )}
 
-        {/* User section */}
         <div className="flex items-center gap-2">
           {authenticated && user ? (
             <div className="flex items-center gap-3">

@@ -13,11 +13,6 @@ export interface AuthenticatedUser {
   picture: string | null;
 }
 
-/**
- * Get the authenticated user from the session and database
- * Creates the user in the database if they don't exist yet
- * Returns null if not authenticated
- */
 export async function getAuthenticatedUser(): Promise<AuthenticatedUser | null> {
   const { getUser, isAuthenticated } = getKindeServerSession();
 
@@ -29,7 +24,6 @@ export async function getAuthenticatedUser(): Promise<AuthenticatedUser | null> 
 
   const db = getDB();
 
-  // Check if user exists in database (by kindeId OR email)
   const { error: selectError, result } = await mightFail(
     db
       .select()
@@ -48,11 +42,9 @@ export async function getAuthenticatedUser(): Promise<AuthenticatedUser | null> 
     return null;
   }
 
-  // If user exists, update kindeId if needed and return them
   if (result && result.length > 0) {
     const dbUser = result[0];
 
-    // Update kindeId if it changed (user might have been created with different auth)
     if (dbUser.kindeId !== kindeUser.id) {
       await mightFail(
         db
@@ -72,7 +64,6 @@ export async function getAuthenticatedUser(): Promise<AuthenticatedUser | null> 
     };
   }
 
-  // User doesn't exist - create them
   const { error: insertError, result: insertResult } = await mightFail(
     db
       .insert(users)
@@ -102,9 +93,6 @@ export async function getAuthenticatedUser(): Promise<AuthenticatedUser | null> 
   };
 }
 
-/**
- * Require authentication - throws error if not authenticated
- */
 export async function requireAuth(): Promise<AuthenticatedUser> {
   const user = await getAuthenticatedUser();
   if (!user) {
