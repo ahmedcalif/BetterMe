@@ -77,7 +77,7 @@ export default function ProfileSettings({
           </div>
         )}
         <div>
-          <p className="text-sm text-stone mb-1">Email</p>
+          <p className="text-sm text-bark-800 mb-1">Email</p>
           <p className="text-bark font-medium">{email}</p>
         </div>
       </div>

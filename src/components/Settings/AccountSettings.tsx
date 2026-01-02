@@ -39,7 +39,7 @@ export default function AccountSettings() {
       <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
         <div>
           <h3 className="font-medium text-bark mb-1">Sign Out</h3>
-          <p className="text-sm text-stone">
+          <p className="text-sm text-bark-800">
             Sign out of your account on this device
           </p>
         </div>

@@ -487,6 +487,14 @@ body {
   border-color: #262626;
 }
 
+[data-theme="dark"] .bg-white {
+  background-color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .bg-gray-50 {
+  background-color: #262626 !important;
+}
+
 [data-theme="dark"] .input {
   background-color: #1a1a1a;
   border-color: #404040;
@@ -589,4 +597,83 @@ body {
 
 [data-theme="dark"] a:hover {
   color: var(--color-forest-700);
+}
+
+[data-theme="dark"] .text-bark-800 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] p.text-bark-800,
+[data-theme="dark"] span.text-bark-800,
+[data-theme="dark"] label.text-bark-800 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .text-bark {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] h3.font-semibold,
+[data-theme="dark"] h3.font-medium,
+[data-theme="dark"] p.text-sm {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .text-stone {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] label.block {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .bg-white h3,
+[data-theme="dark"] .bg-white p,
+[data-theme="dark"] .bg-white label,
+[data-theme="dark"] .bg-white span {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .bg-gray-50 h3,
+[data-theme="dark"] .bg-gray-50 p,
+[data-theme="dark"] .bg-gray-50 span {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] span:not(.text-cream):not(.text-white):not(.text-green-700):not(.text-red-700):not(.text-red-600),
+[data-theme="dark"] label {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .bg-red-50 {
+  background-color: rgba(220, 38, 38, 0.1) !important;
+}
+
+[data-theme="dark"] .bg-red-50 h3,
+[data-theme="dark"] .bg-red-50 p {
+  color: #fecaca !important;
+}
+
+[data-theme="dark"] .text-red-700,
+[data-theme="dark"] .text-red-600 {
+  color: #fca5a5 !important;
+}
+
+[data-theme="dark"] .text-bark-600 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-br,
+[data-theme="dark"] [class*="bg-gradient"] {
+  background: #1a1a1a !important;
+}
+
+[data-theme="dark"] .bg-gradient-to-br h2,
+[data-theme="dark"] .bg-gradient-to-br h3,
+[data-theme="dark"] .bg-gradient-to-br p,
+[data-theme="dark"] [class*="bg-gradient"] h2,
+[data-theme="dark"] [class*="bg-gradient"] h3,
+[data-theme="dark"] [class*="bg-gradient"] p {
+  color: #ffffff !important;
 }

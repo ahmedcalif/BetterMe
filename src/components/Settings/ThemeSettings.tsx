@@ -61,7 +61,7 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-stone">
+      <p className="text-sm text-bark-800">
         Choose your preferred color scheme for the app
       </p>
 
@@ -81,7 +81,7 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
             <div className={`h-12 rounded-md mb-3 ${theme.preview}`} />
 
             <h3 className="font-semibold text-bark mb-1">{theme.label}</h3>
-            <p className="text-sm text-stone">{theme.description}</p>
+            <p className="text-sm text-bark-800">{theme.description}</p>
 
             {selectedTheme === theme.value && (
               <div className="absolute top-3 right-3 w-6 h-6 bg-forest rounded-full flex items-center justify-center">
@@ -116,7 +116,7 @@ export default function ThemeSettings({ currentTheme }: ThemeSettingsProps) {
         </div>
       )}
 
-      <p className="text-xs text-stone italic">
+      <p className="text-xs text-bark-800 italic">
         Theme preferences are saved to your account and applied across all your
         devices.
       </p>
